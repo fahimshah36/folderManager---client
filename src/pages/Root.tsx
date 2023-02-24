@@ -9,7 +9,7 @@ function Root() {
   const [data, setData] = useState<IFolderDataTypes>();
   useEffect(() => {
     axios
-      .get("http://192.168.0.112:4000/api/folder/63f8217f9eba4545fab6f7d8")
+      .get(`${process.env.REACT_APP_BASE_URL}/63f8217f9eba4545fab6f7d8`)
       .then((response) => {
         const data = response.data.data;
         setData(data);

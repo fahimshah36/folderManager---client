@@ -12,6 +12,7 @@ function Folder() {
   const [root, setRoot] = useState<boolean>(false);
   const {id} = useParams();
   const navigate = useNavigate();
+  console.log(id);
 
   const [showModal, setShowModal] = useState(false);
 
@@ -27,7 +28,7 @@ function Folder() {
 
   useEffect(() => {
     axios
-      .get(`http://192.168.0.112:4000/api/folder/${id}`)
+      .get(`${process.env.REACT_APP_BASE_URL}/${id}`)
       .then((response) => {
         const data = response.data.data;
         setData(data);
@@ -39,7 +40,7 @@ function Folder() {
 
   const onDelete = async () => {
     if (data?.parent) {
-      await axios.delete(`http://192.168.0.112:4000/api/folder/${id}`);
+      await axios.delete(`${process.env.REACT_APP_BASE_URL}/${id}`);
       navigate(-1);
     } else {
       setRoot(true);
@@ -59,7 +60,7 @@ function Folder() {
     try {
       await axios({
         method: "post",
-        url: `http://192.168.0.112:4000/api/folder`,
+        url: process.env.REACT_APP_BASE_URL,
         data: body,
       });
       closeModal();
